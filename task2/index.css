@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-right: 1px solid black;
+}
+
+th {
+    cursor: pointer;
+    background-color: rgb(133, 243, 82);
+}
+th.sorted-asc::after {
+    content: ' \25B2';
+}
+th.sorted-desc::after {
+    content: ' \25BC';
+}
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+.pagination button {
+    padding: 5px 10px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+tr:nth-child(odd){
+    background-color: rgb(205, 248, 183);
+}
+tr:hover{
+    background-color: rgb(222, 220, 219);
+}
+#searchInput{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
