@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <button id="add-text" class="but">Add Text Input</button>
+        <button id="add-checkbox" class="but">Add Checkbox</button>
+        <button id="add-radio" class="but">Add Radio Button</button>
+        <button id="remove-last" class="removebutt">Remove Last Field</button>
+    </div>
+
+    <div class="content">
+        <h1 style="text-align:center;">Dynamic Form Builder</h1>
+        <div id="form-container" class="">
+            <form id="dynamic-form">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('dynamic-form');
+            const textfieldAdd = document.getElementById('add-text');
+            const checkboxAdd = document.getElementById('add-checkbox');
+            const radiobuttonAdd = document.getElementById('add-radio');
+            const removeLastButton = document.getElementById('remove-last');
+            let count = 0;
+            textfieldAdd.addEventListener('click', () => addField('text'));
+            checkboxAdd.addEventListener('click', () => addField('checkbox'));
+            radiobuttonAdd.addEventListener('click', () => addField('radio'));
+            removeLastButton.addEventListener('click', removeLastField);
+
+            const addField=(type)=>{
+                count++;
+                if (count >= 1) { // Check if count becomes 0 after removing a field
+                    const container = document.getElementById('form-container');
+                    container.classList.add('formcontainer');
+                }
+                const newbox = document.createElement('div');
+                newbox.className = 'form-field';
+                newbox.id = `field-${count}`;
+
+                let newField;
+                switch (type) {
+                    case 'text':
+                        newField = document.createElement('input');
+                        newField.type = 'text';
+                        newField.name = `text-${count}`;
+                        newField.placeholder = `Text Input ${count}`;
+                        break;
+                    case 'checkbox':
+                        newField = document.createElement('input');
+                        newField.type = 'checkbox';
+                        newField.name = `checkbox-${count}`;
+                        newbox.appendChild(document.createTextNode(` Checkbox ${count} `));
+                        break;
+                    case 'radio':
+                        newField = document.createElement('input');
+                        newField.type = 'radio';
+                        newField.name = 'radio-group';
+                        newField.value = `radio-${count}`;
+                        newbox.appendChild(document.createTextNode(` Radio Button ${count} `));
+                        break;
+                }
+
+                newbox.appendChild(newField);
+                newbox.classList.add('borderff');
+                form.appendChild(newbox);
+                if (count === 0) {
+                    const container = document.getElementById('form-container');
+                    container.classList.remove('formcontainer');
+                }
+            }
+
+            function removeLastField(){
+                if (form.lastChild){
+                    form.removeChild(form.lastChild);
+                    count--;
+                }
+                if (count === 0){ 
+                    const container = document.getElementById('form-container');
+                    container.classList.remove('formcontainer');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
