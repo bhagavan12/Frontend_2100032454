@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlight Long Words</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="headers">Words longer than eight characters are highlighted</h2>
+        <p id="textParagraph">
+            React implements a browser-independent DOM system for performance and cross-browser compatibility. We took
+            the opportunity to clean up a few rough edges in browser DOM implementations.
+            In React, all DOM properties and attributes (including event handlers) should be camelCased. For example,
+            the HTML attribute tabindex corresponds to the attribute tabIndex in React.
+            The exception is aria-* and data-* attributes, which should be lowercased. For example, you can keep
+            aria-label as aria-label.
+        </p>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const text = document.getElementById('textParagraph').innerHTML;
+                const regex = /(\S{9,})/g;
+                const highlightedText = text.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+                document.getElementById('textParagraph').innerHTML = highlightedText;
+            });
+        </script>
+
+</body>
+
+</html>
